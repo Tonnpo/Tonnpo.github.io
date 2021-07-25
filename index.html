@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Yes?</title>
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="header">
+            <a href="#">
+                Why Yes ? | <span class="text-sm">Get your idea straight!</span>
+            </a>
+        </div>
+
+        <div class="main">
+            <div class="container">
+                <div class="top-container">
+                    <h1 class="title">Why Yes?</h1>
+                    <div class="steps">
+                        <div class="step active"></div>
+                        <div class="step"></div>
+                        <div class="step"></div>
+                        <div class="step"></div>
+                    </div>
+                </div>
+                <div class="bottom-container">
+                    <div class="content-wrapper">
+                        <div class="content active">
+                            <h3 class="title">What are you assuming ?</h3>
+                            <div>
+                                <label for="answer">
+                                    <input class="input-answer" type="text" name="q1" autocomplete="off">
+                                </label>
+                                <div class="btns">
+                                    <div class="btn btn-primary add-btn">Add</div>
+                                    <div class="btn btn-secondary clear-btn">Clear</div>
+                                </div>
+                                <div class="error-text"></div>
+                                <div class="answers"></div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Why the time is right ?</h3>
+                            <div>
+                                <label for="answer">
+                                    <input class="input-answer" type="text" name="q2" autocomplete="off">
+                                </label>
+                                <div class="btns">
+                                    <div class="btn btn-primary add-btn">Add</div>
+                                    <div class="btn btn-secondary clear-btn">Clear</div>
+                                </div>
+                                <div class="error-text"></div>
+                                <div class="answers"></div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3 class="title">What if you are wrong ?</h3>
+                            <div>
+                                <label for="answer">
+                                    <input class="input-answer" type="text" name="q3" autocomplete="off">
+                                </label>
+                                <div class="btns">
+                                    <div class="btn btn-primary add-btn">Add</div>
+                                    <div class="btn btn-secondary clear-btn">Clear</div>
+                                </div>
+                                <div class="error-text"></div>
+                                <div class="answers"></div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3 class="title text-center">Congratulations!</h3>
+                            <p class="text-center mt-5">I hope this helps you refining your ideas and examine possibilities and consequences.</p>
+                            <div class="text-center mt-3">
+                                <div class="btn btn-primary note-btn">Your note</div>
+                                <div class="btn btn-secondary reset-btn">Start Over</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <div class="btn btn-secondary back-btn">Back</div>
+                        <div class="btn btn-primary next-btn">Next</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            View code on <a target="_blank" href="https://github.com/Tonnpo/whyyes">github</a>
+        </div>
+
+        <div class="modal-container">
+            <div class="modal">
+                <div class="modal-header">
+                    <div>
+                        <h1 class="color-01">Make the world great again !</h1>
+                        <p class="color-04 text-sm mt-1">The best way to remember is to take notes</p>
+                    </div>
+                    <div>
+                        <img class="close-btn" src="./assets/img/cross.png" alt="cross">
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <h3 class="color-03">You are assuming...</h3>
+                    <div class="q1 mt-2"></div>
+                </div>
+                <div class="mt-3">
+                    <h3 class="color-03">It is the right time because...</h3>
+                    <div class="q2 mt-2"></div>
+                </div>
+                <div class="mt-3">
+                    <h3 class="color-03">If you are wrong, then...</h3>
+                    <div class="q3 mt-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/script/script.js"></script>
+</body>
+</html>
