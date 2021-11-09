@@ -183,3 +183,8 @@ window.addEventListener('click', function(e){
         targ.classList.remove('active');
     }
 });
+
+window.addEventListener('resize', function(){
+    modal.style.width = `${window.innerWidth}px`;
+    modal.style.height = `${window.innerHeight}px`;
+});
