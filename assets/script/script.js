@@ -169,6 +169,8 @@ noteBtn.addEventListener('click', function(){
     if(q3.childNodes.length == 0){
         appendAnswers(answers['q3'], q3);
     }
+    modal.style.width = `${window.innerWidth}px`;
+    modal.style.height = `${window.innerHeight}px`;
 });
 
 closeBtn.addEventListener('click', function(){
