@@ -1,0 +1,14 @@
+// Placeholder to allow defining custom styles that override everything else.
+// (Use `_sass/minima/custom-variables.scss` to override variable defaults)
+.page-link.active {
+    font-weight: bold;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2a7ae2;
+    margin-top: 20px;
+    border-bottom: 2px solid #2a7ae2;
+    padding-bottom: 5px;
+  }
