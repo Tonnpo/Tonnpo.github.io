@@ -35,23 +35,34 @@ layout: base
   {%- endif -%}
 
   {%- if page.tags -%}
-    <p>Tags: </p>
-    <ul class="post-tags">
+    <div class="post-tags">
+      <p>Tags: </p>
       {%- for tag in page.tags -%}
-        <li><a href="{{ '/tags/' | relative_url | append: tag | append: '/' }}">{{ tag }}</a></li>
+        <button class="tag-button">{{ tag }}</button>
       {%- endfor -%}
-    </ul>
+    </div>
   {%- endif -%}
 
   {%- if page.categories -%}
-  <p>categories: </p>
-  <ul class="post-categories">
+  <div class="post-categories">
+    <p>Categories: </p>
     {%- for category in page.categories -%}
-      <li><a href="{{ '/categories/' | relative_url | append: category | append: '/' }}">{{ category }}</a></li>
+      <button class="category-button">{{ category }}</button>
     {%- endfor -%}
-    </ul>
-
+  </div>
   {%- endif -%}
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+
+  {%- if page.references -%}
+  <div class="post-references">
+    <h2>References</h2>
+    <ul class="post-references-list">
+      {%- for ref in page.references -%}
+        {%- assign reference = site.data.references | where: "id", ref | first -%}
+        <li>{{ reference.text }}</li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- endif -%}
 </article>

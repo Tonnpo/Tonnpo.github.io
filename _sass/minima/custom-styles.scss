@@ -12,3 +12,37 @@
     border-bottom: 2px solid #2a7ae2;
     padding-bottom: 5px;
   }
+
+.post-tags, .post-categories {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.post-tags > p, .post-categories > p {
+    margin-bottom: 0;
+}
+
+  
+.tag-button, .category-button {
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: default; // no linking functionality
+    border-radius: 5px;
+    font-size: 0.875rem;
+}
+
+.category-button { background-color: #2a7ae2;  }
+.category-button:hover { background-color: #1756a9; }
+
+.tag-button { background-color: #4b0082; }
+.tag-button:hover { background-color: #36005c;}
+
+.post-references {
+    margin-top: 1.5rem;
+}
+.post-references-list{
+    list-style: circle;
+}
