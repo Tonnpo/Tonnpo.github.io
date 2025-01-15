@@ -41,4 +41,4 @@ where $\mu$ is the mean of the population which can be estimated by
 
 $$\hat{\mu} = \overline{x} = \frac{\sum_{t=1}^{n} x_t}{n}$$
 
-We say that a time series is **second-order stationary** if it is stationary in the mean and the autocovariance function only depends on the lag term $k$
+We say that a time series is **second-order stationary** if it is stationary in the mean and the autocovariance function only depends on the lag term \\(k\\)
