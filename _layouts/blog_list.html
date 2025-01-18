@@ -17,7 +17,7 @@ layout: base
   {%- assign category_name = category[0] -%}
   {%- assign category_posts = category[1] -%}
   {%- if category_name and category_posts -%}
-    <h2 class="category-title">{{ category_name | capitalize }}</h2>
+    <h2 class="category-title">{{ category_name | replace: '-', ' ' | capitalize }}</h2>
     <ul class="post-list">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       {%- for post in category_posts -%}
