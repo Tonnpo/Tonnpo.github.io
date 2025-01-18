@@ -71,7 +71,7 @@ f(y_i; \theta_i) = \exp \left[y_i b(\theta_i) +c(\theta_i) + d(y_i) \right]
 $$
 
 
-We are interested in a set of explanatory varibles which has a smaller set of parameters \\(\beta_1, \beta_2, \cdots \beta_p \\) where \\(p < N\\). A **generalized linear model** of \\(Y_1, Y_2, \cdots, Y_N \\) is defined as
+We are interested in a set of explanatory varibles which has a smaller set of parameters \\(\beta_1, \beta_2, \cdots \beta_p \\) where \\(p < N\\). A **generalized linear model** of \\(Y_1, Y_2, \cdots, Y_N \\) with the properties stated above is defined as
 
 $$
 g(\mu_i) = x_i^T \beta
