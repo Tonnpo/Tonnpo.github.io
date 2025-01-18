@@ -1,2 +1,6 @@
 - id: intro_time_series_r
   text: "Cowpertwait, P. S. P., & Metcalfe, A. V. (2009). Introductory Time Series with R. Springer-Verlag."
+- id: math_for_ml
+  text: "Deisenroth, M. P., Faisal, A. A., & Ong, C. S. (2020). Mathematics for Machine Learning. Cambridge University Press. https://mml-book.com."
+- id: glm
+  text: "Dobson, A. J., & Barnett, A. G. (2018). An introduction to generalized linear models. CRC Press, Taylor & Francis Group."
