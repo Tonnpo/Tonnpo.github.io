@@ -4,3 +4,13 @@
   text: "Deisenroth, M. P., Faisal, A. A., & Ong, C. S. (2020). Mathematics for Machine Learning. Cambridge University Press. https://mml-book.com."
 - id: glm
   text: "Dobson, A. J., & Barnett, A. G. (2018). An introduction to generalized linear models. CRC Press, Taylor & Francis Group."
+- id: stoch_calc_1
+  text: "Shreve, S. E. (2004). Stochastic calculus for finance I, the binomial asset pricing model. Springer."
+- id: stoch_calc_2
+  text: "Shreve, S. E. (2004). Stochastic calculus for finance. II, continuous-time models. Springer."
+- id: AMZN_stock_quote
+  text: Amazon.com Inc. (AMZN). (2025, January 19). Stock quote. Yahoo Finance. https://finance.yahoo.com/quote/AMZN/
+- id: AMZN_option_quote
+  text: Amazon.com Inc. (AMZN). (2025, January 19). Option quote. Yahoo Finance. https://finance.yahoo.com/quote/AMZN/options/
+- id: SOFR
+  text: Federal Reserve Bank of New York. (2025). Secured Overnight Financing Rate Data. https://www.newyorkfed.org/markets/reference-rates/sofr
