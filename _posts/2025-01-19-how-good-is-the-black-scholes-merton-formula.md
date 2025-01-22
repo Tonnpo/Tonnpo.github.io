@@ -66,7 +66,6 @@ dat = yf.Ticker("AMZN")
 expiration_date = dat.options[0]
 call_prices = dat.option_chain(expiration_date).calls
 {% endhighlight %}
-This is what 
 Note here that we use the closest expiration date for the variable `expiration_date`. At the time of writing, the last traiding day is January 17, 2025 and the closest expiration date is January 24, 2025.
 
 ### Step 2: Write helper functions to calculate call options prices
