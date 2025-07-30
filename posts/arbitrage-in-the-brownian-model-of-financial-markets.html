@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arbitrage in the Brownian model of financial markets</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/mathjax-config.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <article>
+    <h1>Arbitrage in the Brownian model of financial markets</h1>
+
+    <p>
+      Given a probability space $(\Omega, \mathcal{F}, \mathbb{P})$, suppose a financial market consists of $m$ stocks driven by a $d$ Brownian motions $W_1(t), \cdots, W_d(t)$ under $\mathbb{P}$. The stock price processes follow
+      $$dS_i(t) = \alpha_i(t) S_i(t) dt + S_i(t) \sum_{j=1}^d \sigma_{ij}(t) dW_j(t)$$
+      for $i=1, \cdots, m$. The <b>First Fundamental Theorem of Asset Pricing</b> states that if a market model has a risk-neutral probability measure, then it does not admit arbitrage.
+    </p>
+
+    <h2>What is an arbitrage?</h2>
+    <p>
+      Mathematically, an <b>arbitrage</b> can be defined as a portfolio value process $X(t)$ such that $X(0)=0$ and satisfy, for some time $T>0$,
+      $$\mathbb{P}\{X(T) \geq 0\} = 1, \mathbb{P}\{X(T) > 0\} > 0$$
+      For example, suppose a high-yield saving account offers a 5% APY. If you can borrow money from your friend and convince him or her to pay back a year from now with interest rate less than 5%, then you find an arbitrage.
+    </p>
+
+
+    <h2>How do we know if there is (or isn't) an arbitrage?</h2>
+
+    <p>
+      An arbitrage can be equivalently defined as the portfolio value process $X(t)$ such that $X(0)$ is positive and satisfy, for some time $T>0$,
+
+      $$\mathbb{P}\{D(T)X(T) \geq X(0)\} = 1, \mathbb{P}\{D(T)X(T) > X(0)\} > 0$$
+
+      where $D(t)$ is a discount process. Typically, the discount process is defined as
+      $$D(t) = e^{-\int_0^t R(s) ds}$$
+      where $R(t)$ is an adapted interest rate process to the filtration $\mathcal{F}(t)$. From the First Fundamental Theorem of Asset Pricing, an existence of risk-neutral measure implies no arbitrage. 
+      This is because every discounted portfolio value process $D(t)X(t)$ is a martingale under the risk-neutral measure $\tilde{\mathbb{P}}$. This means
+
+      $$\tilde{\mathbb{E}}[D(T)X(T)] = D(0)X(0) = X(0)$$
+
+      Suppose there exists $X(t)$ such that $\mathbb{P}\{D(T)X(T) \geq X(0)\} = 1$, or equivalently, $\mathbb{P}\{D(T)X(T) < X(0)\} = 0$. Because $\tilde{\mathbb{P}}$ and $\mathbb{P}$ are equivalent, $\tilde{\mathbb{P}}\{D(T)X(T) < X(0)\} = 0$.
+      Since $\tilde{\mathbb{E}}[D(T)X(T)] = D(0)X(0) = X(0)$, $\tilde{\mathbb{P}}\{D(T)X(T) > X(0)\} = 0$ which implies no arbitrage.
+    </p>
+
+
+    <h2>How do we know if there is (or isn't) a risk-neutral measure?</h2>
+
+    <p>
+      Based on the market model, consider the discounted stock price processes which are given by
+
+      $$
+      \begin{align*}
+        d(D(t)S_i(t)) &= dD(t)S_i(t) + D(t)dS_i(t) + dD(t)dS_i(t) \\
+        &= -R(t)D(t)S_i(t) dt + D(t)\alpha_i(t) S_i(t) dt +D(t)S_i(t) \sum_{j=1}^d \sigma_{ij}(t) dW_j(t) \\
+        &= D(t)S_i(t) \left[(\alpha_i(t) - R(t)) dt + \sum_{j=1}^d \sigma_{ij}(t) dW_j(t) \right]
+      \end{align*}$$
+
+      
+      for $i=1,2, \cdots, m$. If there is an adapted process $\theta_j(t)$ for $j=1, 2, \cdots, d$ such that
+      $$\alpha_i(t) - R(t) = \sum_{j=1}^d \sigma_{ij}(t)\theta_j(t)$$ 
+      These equations are known as <b>market price of risk equations</b>. Then, we can write
+      $$d(D(t)S_i(t)) = D(t)S_i(t)\sum_{j=1}^d \sigma_{ij}(t) \left[\theta_j(t) dt + \sigma_i(t) dW_j(t) \right]$$
+      We can construct a risk-neutral measure with $\theta_1(t), \cdots, \theta_d(t)$ through the Girsanov Theorem and 
+      $$\tilde{W}_j(t) = W_j(t) + \int_0^t \theta_j(u) du$$
+      are Brownian motions under $\tilde{\mathbb{P}}$. Thus, 
+      $$d(D(t)S_i(t)) = D(t)S_i(t)\sum_{j=1}^d \sigma_{ij}(t) \left[\theta_j(t) dt + \sigma_i(t) dW_j(t) \right] = D(t)S_i(t)\sum_{j=1}^d \sigma_{ij}(t) d\tilde{W}_j(t)$$
+      which implies that the discounted stock price processes are martingale under the risk-neutral measure. 
+    </p>
+
+    <p>To summarize, if we can solve the market price of risk equations, we have a risk-neutral measure. When we have a risk-neutral measure, there is no arbitrage.</p>
+
+    <h2>How can we solve the market price of risk equations?</h2>
+
+    <p>This is a system of $m$ equations and $d$ unknown $\theta_1, \cdots, \theta_d$. From linear algebra,</p>
+
+
+    <ol>
+      <li>
+        If $m=d$ and the matrix consisting of $\sigma_{ij}$ is invertible, there is a unique solution
+        $$
+        \begin{bmatrix}
+          \theta_1 \\
+          \theta_2 \\
+          \vdots \\
+         \theta_d
+        \end{bmatrix} = 
+        \begin{bmatrix}
+          \sigma_{11} & \sigma_{12} & \cdots & \sigma_{1d} \\
+          \sigma_{21} & \sigma_{22} & \cdots & \sigma_{2d} \\
+          \vdots & \vdots & \ddots & \vdots \\
+          \sigma_{m1} & \sigma_{m2} & \cdots & \sigma_{md}
+        \end{bmatrix}^{-1} \begin{bmatrix}
+          \alpha_1 - r \\
+          \alpha_2 - r \\
+          \vdots \\
+          \alpha_m - r
+        \end{bmatrix} 
+        $$
+      </li>
+      <li>If $m > d$, then we may not have a solution. However, we can approximate it with the least square method.</li>
+      <li>If $m < d$, then the solution may not be unique. In this case, we can choose the solution with the minimum norm.</li>
+    </ol>
+
+
+    <h3>Example</h3>
+    <p>
+      Let's take a look at how an arbitrage can arise in a model. For simplicity, let's assume three stocks driven by two Brownian motions. So, we have
+      
+      $$dS_1(t) = \alpha_1 S_1(t)dt + \sigma_{11} dW_1(t) + \sigma_{12} dW_2(t)$$
+      $$dS_2(t) = \alpha_2 S_2(t)dt + \sigma_{21} dW_1(t) + \sigma_{22} dW_2(t)$$
+      $$dS_3(t) = \alpha_3 S_3(t)dt + \sigma_{31} dW_1(t) + \sigma_{32} dW_2(t)$$
+
+      The market price of risk equations are
+
+      $$
+        \begin{bmatrix}
+          \alpha_1 - r \\
+          \alpha_2 - r \\
+          \alpha_3 - r
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+          \sigma_{11} & \sigma_{12} \\
+          \sigma_{21} & \sigma_{21} \\
+          \sigma_{31} & \sigma_{32}
+        \end{bmatrix}
+
+        \begin{bmatrix}
+        \theta_1 \\
+        \theta_2
+        \end{bmatrix}
+      $$
+
+      If these equations held, then from
+      $$\frac{\alpha_1 - r - \sigma_{12} \theta_2}{\sigma_{11}} = \theta_1$$
+      $$\frac{\alpha_2 - r - \sigma_{22} \theta_2}{\sigma_{21}} = \theta_1$$
+      $$\frac{\alpha_3 - r - \sigma_{32} \theta_2}{\sigma_{31}} = \theta_1$$
+
+      We must have
+
+      $$\frac{\alpha_1 - r - \sigma_{12} \theta_2}{\sigma_{11}} = \frac{\alpha_2 - r - \sigma_{22} \theta_2}{\sigma_{21}}$$
+      $$\theta_2 (\sigma_{11}\sigma_{22} - \sigma_{12}\sigma_{21}) = \sigma_{11} (\alpha_2-r) - \sigma_{21}(\alpha_1 - r)$$
+
+      Similarly, from
+
+      $$\frac{\alpha_1 - r - \sigma_{12} \theta_2}{\sigma_{11}} = \frac{\alpha_3 - r - \sigma_{32} \theta_2}{\sigma_{31}}$$
+
+      $$\theta_2 (\sigma_{11}\sigma_{32} - \sigma_{12}\sigma_{31}) = \sigma_{11} (\alpha_3-r) - \sigma_{31}(\alpha_1 - r)$$
+
+      These imply that
+
+
+      $$\frac{\sigma_{11} (\alpha_2-r) - \sigma_{21}(\alpha_1 - r)}{\sigma_{11}\sigma_{22} - \sigma_{12}\sigma_{21}} = \frac{\sigma_{11} (\alpha_3-r) - \sigma_{31}(\alpha_1 - r)}{\sigma_{11}\sigma_{32} - \sigma_{12}\sigma_{31}}$$
+
+
+      If this didn't hold, for example,
+      $$\frac{\sigma_{11} (\alpha_2-r) - \sigma_{21}(\alpha_1 - r)}{\sigma_{11}\sigma_{22} - \sigma_{12}\sigma_{21}} > \frac{\sigma_{11} (\alpha_3-r) - \sigma_{31}(\alpha_1 - r)}{\sigma_{11}\sigma_{32} - \sigma_{12}\sigma_{31}}$$
+
+      Then, we define
+
+      $$\mu = \frac{\sigma_{11} (\alpha_2-r) - \sigma_{21}(\alpha_1 - r)}{\sigma_{11}\sigma_{22} - \sigma_{12}\sigma_{21}} - \frac{\sigma_{11} (\alpha_3-r) - \sigma_{31}(\alpha_1 - r)}{\sigma_{11}\sigma_{32} - \sigma_{12}\sigma_{31}} > 0$$
+
+      This resemble the idea in the example in <a href="#ref1">[1]</a>. So, we can define the weight for each stock as
+
+      $$w_1(t) = \left(\frac{\sigma_{21}}{\sigma_{11}\sigma_{22} - \sigma_{12} \sigma_{21}} - \frac{\sigma_{31}}{\sigma_{11}\sigma_{32} - \sigma_{31} \sigma_{12}} \right) \frac{1}{S_1(t)}$$
+      $$w_2(t) = - \left(\frac{\sigma_{11}}{\sigma_{11}\sigma_{22} - \sigma_{12} \sigma_{21}}  \right) \frac{1}{S_2(t)}$$
+      $$w_3(t) = \left( \frac{\sigma_{11}}{\sigma_{11}\sigma_{32} - \sigma_{31} \sigma_{12}} \right) \frac{1}{S_3(t)}$$
+
+      For simplicity, define $D_1 = \sigma_{11}\sigma_{22} - \sigma_{12} \sigma_{21}$ and $D_2 = \sigma_{11}\sigma_{32} - \sigma_{31} \sigma_{12}$. Then, the differential of the portfolio value process is
+      $$dX(t) = \sum_{i=1}^3 w_i(t) dS_i(t) + r(X(t) - \sum_{i=1}^3 w_i(t) S_i(t)) dt$$ 
+
+      satisfies
+
+      $$
+        \begin{align*}
+          dX(t) &= \left[ \left( \frac{\sigma_{21}}{D_1} - \frac{\sigma_{31}}{D_2} \right)(\alpha_1 - r) - \frac{\sigma_{11}}{D_1} (\alpha_2 - r) + \frac{\sigma_{11}}{D_2} (\alpha_3 - r) \right] dt \\
+          &+ \left( \frac{\sigma_{21}}{D_1} - \frac{\sigma_{31}}{D_2} \right) (\sigma_{11} dW_1(t) + \sigma_{12} dW_2(t)) - \frac{\sigma_{11}}{D_1}(\sigma_{21} dW_1(t) + \sigma_{22} dW_2(t))\\
+          &+ \frac{\sigma_{11}}{D_2}(\sigma_{31} dW_1(t) + \sigma_{32} dW_2(t)) + rX(t) dt
+        \end{align*}
+      $$
+
+      Group the terms, we have that
+
+      $$dX(t) = \mu dt + rX(t) dt$$
+
+      since $\mu > 0$, this implies that the portfolio will grow at a nonrandom and positive rate higher than the interest rate $r$. In other words, when you look at the differential of the discounted portfolio value process,
+
+      $$
+      \begin{align*}
+      d(D(t)X(t)) &= X(t) dD(t) + D(t) dX(t) + dD(t)dX(t)\\
+      &= -r D(t)X(t) dt + D(t) \left[ \mu dt + rX(t) dt \right] \\
+      &= \mu D(t) dt
+      \end{align*}$$
+
+      Integrating both sides from 0 to $T$ gives
+
+      $$D(T)X(T) - D(0)X(0) =  \int_0^T \mu D(t) dt$$
+
+      Because $\mu > 0$, $\int_0^T \mu D(t) dt = D(T)X(T) - D(0)X(0) > 0$ which means that $\mathbb{P}\{D(T)X(T) > D(0)X(0)\} > 0$ admitting the arbitrage.
+    </p>
+
+
+    <h3>Constructing an arbitrage portfolio</h3>
+
+    <p>
+      Suppose there is an arbitrage in the model. In other words, the market price of risk equations cannot be solved.
+      In the previous example, we derived the formula for the weight of each stock $w_i$ for $i=1,2,\cdots, m$ which is used to construct an arbitrage portfolio. However, this looks tedious when we have many more stocks. Because the market price of risk equations don't hold, we can try to solve the minimization problem
+
+      $$\min_{\boldsymbol{\theta}} \lVert (\boldsymbol{\alpha} - r\mathbf{1}_m) - \mathbf{\Sigma} \boldsymbol{\theta} \rVert^2$$
+
+      where
+
+      $$\boldsymbol{\theta} = \begin{bmatrix} \theta_1 \\ \theta_2 \\ \vdots \\ \theta_m \end{bmatrix} \in \mathbb{R}^m, \boldsymbol{\alpha} = \begin{bmatrix} \alpha_1 \\ \alpha_2 \\ \vdots \\ \alpha_m \end{bmatrix}\in \mathbb{R}^m, \mathbf{1}_m = \begin{bmatrix} 1 \\ 1\\ \vdots \\ 1 \end{bmatrix}\in \mathbb{R}^m,$$
+      $$\mathbf{\Sigma} = \begin{bmatrix}
+          \sigma_{11} & \sigma_{12} & \cdots & \sigma_{1d} \\
+          \sigma_{21} & \sigma_{22} & \cdots & \sigma_{2d} \\
+          \vdots & \vdots & \ddots & \vdots \\
+          \sigma_{m1} & \sigma_{m2} & \cdots & \sigma_{md}
+        \end{bmatrix}
+      $$
+
+      The normal equation tells us that
+      
+
+      $$\boldsymbol{\theta}^* = (\mathbf{\Sigma}'\mathbf{\Sigma})^{-1} \mathbf{\Sigma}' (\boldsymbol{\alpha} - r\mathbf{1}_m)$$
+
+      Define the residuals to be
+
+      $$\hat{\boldsymbol{\epsilon}} = (\boldsymbol{\alpha} - r\mathbf{1}_m) - \mathbf{\Sigma} \boldsymbol{\theta}^*$$
+
+      Similarly to the previous example, we can define the weight of each stock to be
+
+      $$
+      \mathbf{w} = \begin{bmatrix}
+        w_1(t) \\
+        w_2(t) \\
+        \vdots \\
+        w_m(t)
+      \end{bmatrix} = \begin{bmatrix}
+        \frac{\hat{\epsilon}_1}{S_1(t)} \\
+        \frac{\hat{\epsilon}_2}{S_2(t)} \\
+        \vdots \\
+        \frac{\hat{\epsilon}_m}{S_m(t)}
+      \end{bmatrix}$$
+
+      We can think of $\hat{\epsilon}_i$ as the mispricing of the stock $i$ and we divide by the stock price at time $t$. Imagine two stocks trading at \$100 and the other is trading at \$1. Suppose the mispricing of both stocks is \$1. Then obviously, the \$1 mispricing of the \$1 stock is much more severe than the \$1 mispricing of the \$100 stock.
+      The most important question is <b>does the portfolio constructed from these weights admint an arbitrage?</b>
+    </p>
+
+    <p>
+    Recall the differential of the portfolio value process is
+    $$\begin{align*}
+    dX(t) &= \sum_{i=1}^m w_i(t) dS_i(t) + r(X(t) - \sum_{i=1}^m w_i(t) S_i(t)) dt \\
+    &= \sum_{i=1}^m w_i(t) S_i(t) (\alpha_i -r) dt + \sum_{i=1}^m w_i(t) S_i(t) \sum_{j=1}^d \sigma_{ij} dW_j(t) + rX(t) dt \\
+    &= \sum_{i=1}^m \hat{\epsilon}_i (\alpha_i -r) dt + \sum_{i=1}^m \hat{\epsilon}_i \sum_{j=1}^d \sigma_{ij} dW_j(t) + rX(t) dt
+    \end{align*}$$ 
+
+    Since
+    $$\begin{align*}
+    
+    \hat{\boldsymbol{\epsilon}}' \mathbf{\Sigma} &= ((\boldsymbol{\alpha} - r\mathbf{1}_m) - \mathbf{\Sigma} \boldsymbol{\theta}^*)' \mathbf{\Sigma} \\
+    &=(\boldsymbol{\alpha} - r\mathbf{1}_m)' \mathbf{\Sigma} - {\boldsymbol{\theta}^{*}}' \mathbf{\Sigma}' \mathbf{\Sigma} \\
+    &=(\boldsymbol{\alpha} - r\mathbf{1}_m)' \mathbf{\Sigma} - (\boldsymbol{\alpha} - r\mathbf{1}_m)'\mathbf{\Sigma} (\mathbf{\Sigma}'\mathbf{\Sigma})^{-1}   \mathbf{\Sigma}' \mathbf{\Sigma} \\
+    &= \mathbf{0}
+    \end{align*}$$
+
+    Then
+
+    $$\sum_{i=1}^m \hat{\epsilon}_i \sum_{j=1}^d \sigma_{ij} = \sum_{j=1}^d \left( \sum_{i=1}^m \epsilon_i \sigma_{ij} \right) = 0$$
+
+    Therefore,
+    $$dX(t) = \sum_{i=1}^m \hat{\epsilon}_i (\alpha_i -r) dt + rX(t) dt$$
+
+    Because
+    $$\begin{align*}
+    \sum_{i=1}^m \hat{\epsilon}_i (\alpha_i -r) &= \hat{\boldsymbol{\epsilon}}' (\boldsymbol{\alpha} - r\mathbf{1}_m)\\
+    &= \hat{\boldsymbol{\epsilon}}' (\hat{\boldsymbol{\epsilon}} + \mathbf{\Sigma} \boldsymbol{\theta}^*) \\
+    &= \hat{\boldsymbol{\epsilon}}' \hat{\boldsymbol{\epsilon}} + \hat{\boldsymbol{\epsilon}}' \mathbf{\Sigma} \boldsymbol{\theta}^*\\
+    &= \hat{\boldsymbol{\epsilon}}' \hat{\boldsymbol{\epsilon}}
+    \end{align*}$$
+
+    Note that we use $\hat{\boldsymbol{\epsilon}}' \mathbf{\Sigma} = 0$ as shown previously. If $\hat{\boldsymbol{\epsilon}} = \mathbf{0}$, then the market price of risks are solved. If $\hat{\boldsymbol{\epsilon}} \neq \mathbf{0}$, then we have $\hat{\boldsymbol{\epsilon}}' \hat{\boldsymbol{\epsilon}} > 0$. Following the same logic as in the example, this implies that the portfolio will grow at a nonrandom and positive rate higher than the interest rate $r$ and thus admits an arbitrage.
+    To construct such an arbitrage portfolio, we buy stocks with positive mispricing and short stocks with negative mispricing according to the magnitude of the weights.
+  
+    </p>
+
+
+
+    <h2>Reference</h2>
+    <ol class="bracketed-citations">
+      <li id="ref1">Shreve, S. E. (2010). <em>Stochastic calculus for finance. II, Continuous-time models.</em> Springer.</li>
+    </ol>
+    <a href="../index.html">← Back to Home</a>
+  </article>
+</body>
+</html>
