@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Margrabe's formula</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/mathjax-config.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <article>
+    <h1>Margrabe's formula</h1>
+
+
+
+    <h2>Problem statement</h2>
+    Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space with filtration $\mathcal{F}(t)$. Suppose there are two risky assets in which their prices at time $t$ are denoted by $S_1(t)$ and $S_2(t)$. Consider a European style option to exchange one asset for another at expiration time $T$. In other words, the payoff of this option at time $T$ is
+
+    $$V(T) = \max (S_1(T) - S_2(T), 0)$$
+
+    Suppose that 
+    $$dS_1(t) = \alpha_1 S_1(t) dt + \sigma_{1} S_1(t) dB_1(t)$$
+    $$dS_2(t) = \alpha_2 S_2(t) dt +  \sigma_{2} S_2(t) dB_2(t)$$
+
+    Where $B_1(t)$ and $B_2(t)$ are correlated Brownian motions under the probability measure $\mathbb{P}$ and $dB_1(t) dB_2(t) = \rho dt$.    
+    <h2>Derivation</h2>
+
+    From the exercise in <a href="#ref1">[1]</a>, we can rewrite these equations as
+    
+    $$dS_1(t) = \alpha_1 S_1(t) dt + \sigma_{1} S_1(t) dW_1(t)$$
+    $$dS_2(t) = \alpha_2 S_2(t) dt + \sigma_2 \rho S_2(t) dW_1(t) + \sigma_2\sqrt{1-\rho^2} S_2(t) dW_2(t)$$
+
+    Where $W_1(t)$ and $W_2(t)$ are independent Brownian motions under $\mathbb{P}$. Assume that the risk-free rate is $r$ and the market is complete i.e. there exists a unique risk-neutral measure $\tilde{\mathbb{P}}$. Implicitly, we assume that the following <b>market price of risk equations</b> hold
+
+    $$\alpha_1 - r= \sigma_1\theta_1$$
+    $$\alpha_2 - r - \sigma_2 \rho \theta_1 = \sigma_2 \sqrt{1-\rho^2}  \theta_2$$
+
+    From the first equation, we can define the Brownian motion $\tilde{W}_1(t) = \theta_1 t + W_1(t)$ under the risk-neutral measure $\tilde{\mathbb{P}}$. To get the second equation, define the discount process $D(t) = e^{-rt}$. Under the risk-neural measure, the discounted stock price processes are martingale which means
+   
+    \begin{align*}
+        d(D(t)S_2(t)) &= (\alpha_2 - r) S_2(t) dt +\sigma_2 \rho S_2(t) dW_1(t) + \sigma_2 \sqrt{1-\rho^2} S_2(t) dW_2(t) \\
+        &= (\alpha_2 - r) S_2(t) dt + \sigma_2 \rho S_2(t) (d\tilde{W}_1(t) - \theta_1 dt) + \sigma_2 \sqrt{1-\rho^2} S_2(t) dW_2(t)\\
+        &= \sigma_2 \rho S_2(t) d\tilde{W}_1(t) + (\alpha_2 - r) S_2(t) dt - \sigma_2 \rho \theta_1 S_2(t) dt+ \sigma_2 \sqrt{1-\rho^2} S_2(t) dW_2(t)
+    \end{align*}
+
+    Because we want to write this as
+    $$d(D(t)S_2(t)) = \sigma_2 \rho S_2(t) d\tilde{W}_1(t) + \sigma_2 \sqrt{1 - \rho^2} S_2(t) d\tilde{W}_2(t)$$
+
+    There must exist $\theta_2$ such that
+
+    $$(\alpha_2 - r) - \sigma_2 \rho \theta_1 = \sigma_2 \sqrt{1-\rho^2} \theta_2$$
+
+    so we can define the Brownian motion $\tilde{W}_2(t) = \theta_2 t + W_2(t)$ under $\tilde{\mathbb{P}}$. Hence, we can write
+
+    $$dS_1(t) = r S_1(t) dt + \sigma_{1} S_1(t) d\tilde{W}_1(t)$$
+    $$dS_2(t) = r S_2(t) dt + \sigma_2 \rho S_2(t) d\tilde{W}_1(t) + \sigma_2\sqrt{1-\rho^2} S_2(t) d\tilde{W}_2(t)$$
+
+    Because these two assets have the mean rate of return $r$ under $\tilde{\mathbb{P}}$, they can be characterized by the volatility vector processes $\nu_1(t) = (\sigma_1, 0)$ and $\nu_2(t) = (\sigma_2 \rho, \sigma_2 \sqrt{1-\rho^2})$. Then, let $S_2(t)$ be a numéraire and use the change of risk-neutral measure so that
+    
+    
+    $$dS_1^{(S_2)}(t) = S_1^{S_2}(t) \left[(\sigma_1 - \sigma_2 \rho) d\tilde{W}_1(t) - \sigma_2 \sqrt{1- \rho^2} d\tilde{W_2}(t) \right]$$
+
+    where $S_1^{(S_2)}(t) = \frac{S_1(t)}{S_2(t)}$. Using Itô's lemma with $f(x) = \log (x)$, we have
+
+    \begin{align*}
+        d \log S_1^{(S_2)}(t) &= \frac{dS_1^{(S_2)}(t)}{S_1^{S_2}(t)} - \frac{1}{2} \left(\frac{dS_1^{(S_2)}(t)}{S_1^{S_2}(t)} \right) \left(\frac{dS_1^{(S_2)}(t)}{S_1^{S_2}(t)} \right) \\
+        &= \left[(\sigma_1 - \sigma_2 \rho) d\tilde{W}_1(t) - \sigma_2 \sqrt{1- \rho^2} d\tilde{W_2}(t)\right] - \frac{1}{2} \left[ (\sigma_1 -\sigma_2 \rho)^2 + \sigma_2^2(1-\rho^2) \right] dt
+    \end{align*}
+
+    Thus,
+
+    $$S_1^{(S_2)}(t) = S_1^{(S_2)}(0) \exp\left\{ (\sigma_1 - \sigma_2 \rho) \tilde{W}_1(t) - \sigma_2 \sqrt{1- \rho^2} \tilde{W_2}(t) - \frac{1}{2} \left(\sigma_1^2 - 2\sigma_1\sigma_2 \rho + \sigma_2^2 \right)t \right\}$$
+    
+    Let $\sigma^2 = \sigma_1^2 - 2\sigma_1\sigma_2 \rho + \sigma_2^2$. Notice that we can write the payoff of the option at time $T$ as
+
+    $$V(T) = \max( S_1(T) - S_2(T), 0) = S_2(T) \max(\frac{S_1(T)}{S_2(T)} - 1, 0) = S_2(T) \max(S_1^{(S_2)}(T) - 1, 0)$$
+
+    From the risk-neutral pricing formula, we know
+
+    $$V(t) = \tilde{\mathbb{E}} \left[ e^{-r(T-t)} V(T) \ \vert \ \mathcal{F}(t) \right] = \tilde{\mathbb{E}} \left[ e^{-r(T-t)} S_2(T) \max(S_1^{(S_2)}(T) - 1, 0) \ \vert \ \mathcal{F}(t) \right]$$
+
+
+    Since 
+    $$S_1^{(S_2)}(T) = S_1^{(S_2)}(0) \exp\left\{ (\sigma_1 - \sigma_2 \rho) \tilde{W}_1 (T) - \sigma_2 \sqrt{1- \rho^2} \tilde{W_2}(T) - \frac{1}{2} \sigma^2 T \right\}$$
+    We have
+    $$S_1^{(S_2)}(T) = S_1^{(S_2)}(t) \exp\left\{ (\sigma_1 - \sigma_2 \rho) (\tilde{W}_1 (T) - \tilde{W}_1 (t)) - \sigma_2 \sqrt{1- \rho^2} (\tilde{W_2}(T) - \tilde{W_2}(t)) - \frac{1}{2} \sigma^2 (T-t) \right\}$$
+    Because $\tilde{W}_1 (T) - \tilde{W}_1 (t)$ and $\tilde{W}_2 (T) - \tilde{W}_2 (t)$ are independent of $\mathcal{F}(t)$ and $S_1^{(S_2)}(t)$ is $\mathcal{F}(t)$-measurable, we have 
+    $$V(t) = \tilde{\mathbb{E}} \left[ e^{-r(T-t)} S_2(T) \max(S_1^{(S_2)}(T) - 1, 0) \ \vert \ \mathcal{F}(t) \right] =  \tilde{\mathbb{E}} \left[ e^{-r(T-t)} S_2(T) \ \vert \ \mathcal{F}(t) \right] \tilde{\mathbb{E}} \left[\max(S_1^{(S_2)}(T) - 1, 0)  \right]$$
+    
+    Because discounted stock prices are martingales under $\tilde{\mathbb{P}}$,
+    $$S_2(t) = \tilde{\mathbb{E}} \left[ e^{-r(T-t)} S_2(T) \ \vert \ \mathcal{F}(t) \right]$$
+    Hence, 
+    $$V(t)  =  S_2(t) \tilde{\mathbb{E}} \left[\max(S_1^{(S_2)}(T) - 1, 0)  \right]$$
+   
+    Let $\tau = T-t$ and define
+    $$Y_1 = - \frac{\tilde{W}_1(T) - \tilde{W}_1(t)}{\sqrt{T-t}}, Y_2 = - \frac{\tilde{W}_2(T) - \tilde{W}_2(t)}{\sqrt{T-t}},$$
+    $$Y_3 = \frac{(\sigma_1 - \sigma_2 \rho)Y_1 - \sigma_2 \sqrt{1-\rho^2} Y_2}{\sigma}$$
+    to be standard normal random variables. The term $S_1^{(S_2)}(T) - 1$ is nonzero if and only if
+
+    $$S_1^{(S_2)}(t) \exp\left\{ -(\sigma_1 - \sigma_2 \rho) Y_1 \sqrt{\tau}  + \sigma_2 \sqrt{1- \rho^2} Y_2 \sqrt{\tau} - \frac{1}{2} \sigma^2 \tau \right\} - 1 > 0$$
+    $$-(\sigma_1 - \sigma_2 \rho) Y_1 \sqrt{\tau}  + \sigma_2 \sqrt{1- \rho^2} Y_2 \sqrt{\tau} - \frac{1}{2} \sigma^2 \tau > - \ln S_1^{(S_2)}(t)$$
+    $$-Y_3 \sigma\sqrt{\tau} - \frac{1}{2} \sigma^2 \tau > - \ln S_1^{(S_2)}(t)$$
+    $$Y_3 < \frac{1}{\sigma \sqrt{\tau}} \left[\ln \frac{S_1(t)}{S_2(t)} - \frac{1}{2} \sigma^2 \tau  \right]$$
+
+    Let
+    $$d_{\pm}(\tau, S_1(t), S_2(t)) = \frac{1}{\sigma \sqrt{\tau}} \left[\ln \frac{S_1(t)}{S_2(t)} \pm \frac{1}{2} \sigma^2 \tau  \right]$$
+    
+    Therefore,
+
+    \begin{align*}
+      \tilde{\mathbb{E}} \left[\max(S_1^{(S_2)}(T) - 1, 0)  \right] &= \int_{-\infty}^{\infty} (S_1^{(S_2)}(t) \exp \left\{ -y_3 \sigma\sqrt{\tau} - \frac{1}{2} \sigma^2 \tau\right\}-1)e^{-\frac{y_3^2}{2}} dy_3 \\
+      &=  \frac{1}{2\pi}\int_{-\infty}^{d_{-} (\tau, S_1(t), S_2(t))} (S_1^{(S_2)}(t) \exp \left\{ -y_3 \sigma\sqrt{\tau} - \frac{1}{2} \sigma^2 \tau\right\}-1)e^{-\frac{y_3^2}{2}} dy_3\\
+      &=  \frac{1}{2\pi}\int_{-\infty}^{d_{-} (\tau, S_1(t), S_2(t))} S_1^{(S_2)}(t) \exp \left\{ -y_3 \sigma\sqrt{\tau} - \frac{1}{2} \sigma^2 \tau - \frac{y_3^2}{2} \right\} dy_3 - \frac{1}{2\pi}\int_{-\infty}^{d_{-} (\tau, S_1(t), S_2(t))}e^{-\frac{y_3^2}{2}} dy_3\\
+    \end{align*}
+
+    Let $N(\cdot)$ denote the cumulative distribution of the standard normal distribution. So, 
+    $$N(d_{-} (\tau, S_1(t), S_2(t))) = \frac{1}{2\pi}\int_{-\infty}^{d_{-} (\tau, S_1(t), S_2(t))}e^{-\frac{y_3^2}{2}} dy_3$$
+
+    Moreover, $-y_3 \sigma\sqrt{\tau} - \frac{1}{2} \sigma^2 \tau - \frac{y_3^2}{2} = - \frac{1}{2}(y_3 + \sigma \sqrt{\tau})^2$. Using the change of variable (i.e. defining $y_4 = y_3 + \sigma \sqrt{\tau})$, the first integral becomes
+    
+    \begin{align*}
+    \frac{1}{2\pi}\int_{-\infty}^{d_{-} (\tau, S_1(t), S_2(t))} S_1^{(S_2)}(t) \exp \left\{ -y_3 \sigma\sqrt{\tau} - \frac{1}{2} \sigma^2 \tau - \frac{y_3^2}{2} \right\} dy_3 &= \frac{1}{2\pi}\int_{-\infty}^{d_{+} (\tau, S_1(t), S_2(t))} S_1^{(S_2)}(t) \exp \left\{ - \frac{y_4^2}{2} \right\} dy_4 \\
+    &= N(d_{+} (\tau, S_1(t), S_2(t)))
+    \end{align*}
+
+    Putting all together, we have
+    $$\tilde{\mathbb{E}} \left[\max(S_1^{(S_2)}(T) - 1, 0)  \right] = S_1^{(S_2)}(t)N(d_{+} (\tau, S_1(t), S_2(t))) - N(d_{-} (\tau, S_1(t), S_2(t)))$$
+    Subtituting $S_1^{(S_2)}(t) = \frac{S_1(t)}{S_2(t)}$, then
+    $$V(t)  =  S_2(t) \tilde{\mathbb{E}} \left[\max(S_1^{(S_2)}(T) - 1, 0)  \right] = S_1(t) N(d_{+} (\tau, S_1(t), S_2(t))) - S_2N(d_{-} (\tau, S_1(t), S_2(t))) $$
+    as in <a href="#ref2">[2]</a>
+    <h2>Reference</h2>
+    <ol class="bracketed-citations">
+      <li id="ref1">Shreve, S. E. (2010). <em>Stochastic calculus for finance. II, Continuous-time models.</em> Springer.</li>
+      <li id="ref2">Margrabe, W. (1978). THE VALUE OF AN OPTION TO EXCHANGE ONE ASSET FOR ANOTHER. The Journal of Finance, 33(1), 177–186. https://doi.org/10.1111/j.1540-6261.1978.tb03397.x</li>
+    </ol>
+    <a href="../index.html">← Back to Home</a>
+  </article>
+</body>
+</html>
